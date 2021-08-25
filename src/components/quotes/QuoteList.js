@@ -7,7 +7,9 @@ import { useHistory, useLocation } from "react-router-dom";
 
 //functie pt sortarea listei
 const sortQuotes = (quotes, ascending) => {
-  return quotes.sort((quoteA, quoteB) => {
+  //o mic modificare pt a lucra cu date imuabile
+  const sortedQuotes = [...quotes];
+  return sortedQuotes.sort((quoteA, quoteB) => {
     if (ascending) {
       // ascending will be true/false
       return quoteA.id > quoteB.id ? 1 : -1;
@@ -35,6 +37,10 @@ const QuoteList = (props) => {
   const isSortingAscending = queryParams.get("sort") === "ascending"; // variabila ce va modifica comportamentul
 
   const sorted = sortQuotes(props.quotes, isSortingAscending);
+  // varianta pt sortare
+  // const sorted = props.quotes.sort((a, b) => {
+  //   return isSortingAscending ? a.id[1] - b.id[1] : b.id[1] - a.id[1];
+  // })
 
   const content = sorted.map((quote) => (
     <QuoteItem
