@@ -17,7 +17,7 @@ body {
 }
 
 .focused {
-  font-size: 3rem;
+  font-size: clamp(1.5rem, 4.5vw, 3rem);
   font-weight: bold;
   color: white;
 }

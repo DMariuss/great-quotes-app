@@ -30,7 +30,7 @@ const QuoteForm = (props) => {
     setIsEntering(true); // acum stiu ca utilizatorul lucreaza cu formularul, stare ce va fi trimisa catre Promp (si cand util va parasi pagina si este 'true'
     //                                    Prompt va avertiza
   };
-  console.log("in QuoteForm");
+
   const finishEnteringHandler = () => {
     setIsEntering(false);
   };
@@ -43,7 +43,7 @@ const QuoteForm = (props) => {
           message={(location) => {
             // location 🢣 contine info despre pagina catre care vrem sa navigam
             console.log(location);
-            return "You tried to leave the page without saving data";
+            return "Are you sure you want to leave the page without saving data?";
           }}
         />
         <form

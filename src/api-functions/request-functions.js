@@ -19,3 +19,20 @@ export const addQuote = async (quoteData) => {
 
   return null;
 };
+
+export const getAllQuotes = async () => {
+  const response = await fetch(`${FIREBASE_DOMAIN}/quotes.json`);
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Failed to fetch quotes!");
+  }
+
+  //transform datele primite, din Obiect in Vector.
+  const transformedQuotes = [];
+  for (let key in data) {
+    transformedQuotes.push({ id: key, ...data[key] });
+  }
+
+  return transformedQuotes;
+};

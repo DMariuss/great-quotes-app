@@ -22,6 +22,8 @@ const AddQuote = (props) => {
     //        .push() 🢣 trimite catre o noua pagina, util. se poate reintoarce la pagina precedenta
     //        .replace() 🢣 trimite catre o noua pagina, util. nu i se mai permite reintoarcerea la pagina precedenta(practic o elimina din istoric)
   };
+
+  // initial ⇨ status = pending; cand am un rezultat favorabil ⇨ status = completed
   useEffect(() => {
     if (status === "completed") {
       history.push("/quotes");
@@ -29,7 +31,9 @@ const AddQuote = (props) => {
     // in cazul unei erori 🢣 to be continued
   }, [status, history]);
 
-  return <QuoteForm onAddQuote={addQuoteHandler} />;
+  return (
+    <QuoteForm onAddQuote={addQuoteHandler} isLoading={status === "pending"} />
+  );
 };
 
 export default AddQuote;
