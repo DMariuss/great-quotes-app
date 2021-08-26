@@ -30,7 +30,7 @@ const QuoteForm = (props) => {
     setIsEntering(true); // acum stiu ca utilizatorul lucreaza cu formularul, stare ce va fi trimisa catre Promp (si cand util va parasi pagina si este 'true'
     //                                    Prompt va avertiza
   };
-
+  console.log("in QuoteForm");
   const finishEnteringHandler = () => {
     setIsEntering(false);
   };

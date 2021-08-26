@@ -27,10 +27,19 @@ const QuoteList = (props) => {
   //                            ⇧ intoarce un Obiect de tip URLSearchParams cu anumite metode
 
   const changeSortingHandler = () => {
+    // *** varianta mai abordabila pt history.push() 🢣
+    history.push({
+      pathname: location.pathname,
+      search: `?sort=${isSortingAscending ? "descending" : "ascending"}`,
+    });
+
     //history.push pt a trimite pe aceasta adresa(aici pt a seta parametrii query) si disponibilitatea de a ma reintoarce la pagina precedenta
-    history.push(
-      `/quotes?sort=${isSortingAscending ? "descending" : "ascending"}`
-    ); // orice utilizare a metodelor de pe acest obiect al hook-ului a duce la reevaluarea componentei
+    // history.push(
+    //   `${location.pathname}?sort=${
+    //     // 🢣 location.pathname 🢢 pt a adauga dinamic ruta
+    //     isSortingAscending ? "descending" : "ascending"
+    //   }`
+    // ); // orice utilizare a metodelor de pe acest obiect al hook-ului a duce la reevaluarea componentei
     // ⇧ logica este buna, cumva am o intarziere
   };
 

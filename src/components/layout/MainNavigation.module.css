@@ -9,8 +9,10 @@
 }
 
 .logo {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 4.2vw, 2.5rem);
   color: white;
+  text-shadow: 0.025em 0.025em 0 blue, 0.05em 0.05em 0 yellow,
+    0.075em 0.075em 0 green, 0.01em 0.01em 0 black;
 }
 
 .nav ul {
