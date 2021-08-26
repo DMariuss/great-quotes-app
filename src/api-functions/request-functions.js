@@ -4,6 +4,7 @@
 const FIREBASE_DOMAIN =
   "https://great-quotes-app-2ac05-default-rtdb.europe-west1.firebasedatabase.app";
 
+// 🢣 functie pt a adauta un citat
 export const addQuote = async (quoteData) => {
   const response = await fetch(`${FIREBASE_DOMAIN}/quotes.json`, {
     method: "POST",
@@ -20,6 +21,7 @@ export const addQuote = async (quoteData) => {
   return null;
 };
 
+// 🢣 functie pt a prelua toate citatele
 export const getAllQuotes = async () => {
   const response = await fetch(`${FIREBASE_DOMAIN}/quotes.json`);
   const data = await response.json();
@@ -35,4 +37,16 @@ export const getAllQuotes = async () => {
   }
 
   return transformedQuotes;
+};
+
+// 🢣 functie pt a prelua un singur citat
+export const getSingleQuote = async (quoteId) => {
+  const response = await fetch(`${FIREBASE_DOMAIN}/quotes/${quoteId}.json`);
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Could not fetch the quote!");
+  }
+
+  return { id: quoteId, ...data };
 };

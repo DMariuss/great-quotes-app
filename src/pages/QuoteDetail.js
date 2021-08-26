@@ -7,9 +7,18 @@ import {
 } from "react-router-dom";
 import Comments from "../components/comments/Comments";
 import HighlightedQuote from "../components/quotes/HighlightedQuote";
-import { DUMMY_QUOTES } from "./AllQuotes";
+import LoadingSpinner from "../components/UI/LoadingSpinner";
+import useHttp from "../hooks/useHttp";
+import { getSingleQuote } from "../api-functions/request-functions";
+import { useEffect } from "react";
 
 const QuoteDetails = (props) => {
+  const {
+    sendRequest: fetchSingleQuote,
+    data: singleQuote,
+    error,
+    status,
+  } = useHttp(getSingleQuote, true);
   // *** varianta pt a ascunde link-ul 'See comments'
   // const location = useLocation();
 
@@ -22,22 +31,44 @@ const QuoteDetails = (props) => {
   // *** varianta pt a ascunde link-ul 🢣 nu trebuie sa folosesc starea pt asta, din cauza ca la modificarea url-ului se reevalueaza componenta
   // const hideBtn = location.pathname === `/quotes/${params.quoteId}/comments`;
 
-  //caut citatul selectat in lista cu citate
-  const selectedQuote = DUMMY_QUOTES.find(
-    (quote) => quote.id === params.quoteId
-  );
+  //caut citatul selectat in lista cu citate    ******************** nu mai am nevoie de asta 🢣 o preiau direct de pe server ********************
+  // const selectedQuote = DUMMY_QUOTES.find(
+  //   (quote) => quote.id === params.quoteId
+  // );
 
   // validare, in cazul in care nu se gaseste id-ul respectiv (daca introduc alt id/adresa in URL) *********
-  if (!selectedQuote) {
-    return <p className="no-quote-found">No quote found...</p>;
-  }
-  const { author, text } = selectedQuote;
+  // if (!selectedQuote) {
+  //   return <p className="no-quote-found">No quote found...</p>;
+  // }
+  // const { author, text } = selectedQuote;
 
-  console.log("randare QuoteDetails");
+  //********************************************************************************* change 🢣 🢣 🢣 getting single quote from server ************* */
+  const { quoteId } = params;
+
+  useEffect(() => {
+    fetchSingleQuote(quoteId);
+  }, [fetchSingleQuote, quoteId]);
+
+  if (status === "pending") {
+    return (
+      <div className="centered">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
+  if (error) {
+    return <p className="centered focused">{error}</p>;
+  }
+
+  // 🢣 conditie mai specifica
+  if (!singleQuote.text) {
+    return <p className="centered focused">No quote found!</p>;
+  }
 
   return (
     <div>
-      <HighlightedQuote author={author} text={text} />
+      <HighlightedQuote author={singleQuote.author} text={singleQuote.text} />
       {/* {!hideBtn && (
         <div className="centered">
           <Link to={`/quotes/${params.quoteId}/comments`} className="btn--flat">

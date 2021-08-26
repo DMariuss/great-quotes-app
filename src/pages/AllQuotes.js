@@ -5,29 +5,6 @@ import { getAllQuotes } from "../api-functions/request-functions";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
 import NoQuotesFound from "../components/quotes/NoQuotesFound";
 
-export const DUMMY_QUOTES = [
-  {
-    id: "q1",
-    author: "Julia Child",
-    text: "Viata insasi este un chef ca lumea.",
-  },
-  {
-    id: "q2",
-    author: "Bertrand Russell",
-    text: "A trai fara cateva dintre lucrurile pe care le vrei e o parte indispensabila a fericirii",
-  },
-  {
-    id: "q3",
-    author: "Confucius",
-    text: "Exista cinci virtuti pe care le poti avea oricand: seriozitatea, generozitatea sufletului, sinceritatea , deschiderea si bunatate",
-  },
-  {
-    id: "q4",
-    author: "George Herbert",
-    text: "Furtunile fac radacinile stejarilor sa creasca.",
-  },
-];
-
 const AllQuotes = () => {
   const {
     sendRequest: fetchQuotes,
