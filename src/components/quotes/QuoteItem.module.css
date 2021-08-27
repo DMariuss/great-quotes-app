@@ -7,6 +7,7 @@
   border-radius: 6px;
   background-color: #c2e7f0;
 }
+
 .item a {
   width: auto;
   text-align: center;
@@ -51,5 +52,48 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-end;
+  }
+}
+
+/* @keyframes item-move-up {
+  0% {
+    opacity: 0;
+    transform: translate(0, 50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+@keyframes item-move-down {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 50%);
+  }
+} */
+.click {
+  animation: show-on 0.2s ease-out;
+}
+@keyframes show-on {
+  0% {
+    opacity: 0;
+    transform: translateY(20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes show-off {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }

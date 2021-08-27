@@ -2,7 +2,7 @@ import {
   useParams,
   Route,
   Link,
-  useLocation,
+  // useLocation,
   useRouteMatch,
 } from "react-router-dom";
 import Comments from "../components/comments/Comments";

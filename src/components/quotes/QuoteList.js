@@ -51,14 +51,20 @@ const QuoteList = (props) => {
   //   return isSortingAscending ? a.id[1] - b.id[1] : b.id[1] - a.id[1];
   // })
 
-  const content = sorted.map((quote) => (
-    <QuoteItem
-      key={quote.id}
-      id={quote.id}
-      author={quote.author}
-      text={quote.text}
-    />
-  ));
+  let delay = -100;
+  const content = sorted.map((quote, index) => {
+    delay += 100;
+    return (
+      <QuoteItem
+        key={quote.id} // ⇧ mutat mai sus pe componenta de tranzitie
+        id={quote.id}
+        author={quote.author}
+        text={quote.text}
+        isSortingAscending={isSortingAscending}
+        delay={delay}
+      />
+    );
+  });
 
   return (
     <Fragment>

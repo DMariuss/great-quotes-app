@@ -23,3 +23,50 @@
 .sorting button:hover {
   background-color: #c2fafa;
 }
+
+.item-fade-enter {
+  opacity: 0;
+  transform: translate(0, 50%);
+}
+.item-fade-enter-active {
+  opacity: 1;
+  transform: translate(0, 0);
+  transition: all 0.5s ease-in-out;
+}
+.item-fade-exit {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+.item-fade-exit-active {
+  opacity: 0;
+  transform: translate(0, 50%);
+  transition: all 0.5s ease-in-out;
+}
+
+.up {
+  animation: item-move-up 0.5s ease-in-out;
+}
+.down {
+  animation: item-move-down 0.5s ease-in-out;
+}
+
+@keyframes item-move-up {
+  0% {
+    opacity: 0;
+    transform: translate(0, 50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+@keyframes item-move-down {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 50%);
+  }
+}

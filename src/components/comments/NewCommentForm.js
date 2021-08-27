@@ -7,7 +7,7 @@ import LoadingSpinner from "../UI/LoadingSpinner";
 const NewCommentForm = (props) => {
   const {
     sendRequest: sendQuote,
-    data: commentId,
+    // data: commentId,
     status,
     error,
   } = useHttp(addComment);
