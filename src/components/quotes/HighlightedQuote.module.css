@@ -10,10 +10,11 @@
 
 .quote p {
   font-size: 2.5rem;
+  font-family: "Courgette", cursive;
 }
 
 .quote figcaption {
-  font-style: italic;
+  font-family: "Great Vibes", cursive;
   font-size: 1.5rem;
   text-align: right;
   color: #a1e0e0;
