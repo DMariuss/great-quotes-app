@@ -54,6 +54,9 @@ const Comments = () => {
   ) {
     comments = <p className="centered">No comments were added yet!</p>;
   }
+  if (status === "completed" && error) {
+    comments = <p className="centered">{error}</p>;
+  }
 
   return (
     <section className={classes.comments}>

@@ -6,15 +6,15 @@ import { useState, useEffect } from "react";
 const QuoteItem = (props) => {
   const [animate, setAnimate] = useState(false);
 
-  const liClasses = `${classes.item} ${animate ? classes.click : ""}`;
+  const liClasses = `${classes.item} ${animate ? classes.sort : ""}`;
 
   const { isSortingAscending } = props;
 
   //modific intarzierea pt inlaturarea clasei in functie de cat delay am pe fiecare componenta
-  const delay = 200 + props.delay;
+  const delay = 300 + props.delay;
 
   useEffect(() => {
-    console.log("isSortingAscending changed");
+    //modific starea pt a adauga clasa 'sort'
     setAnimate(true);
     const timerId = setTimeout(() => {
       setAnimate(false);

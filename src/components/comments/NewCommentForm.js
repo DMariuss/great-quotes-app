@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import classes from "./NewCommentForm.module.css";
 import { addComment } from "../../api-functions/request-functions";
 import useHttp from "../../hooks/useHttp";
@@ -11,6 +11,8 @@ const NewCommentForm = (props) => {
     status,
     error,
   } = useHttp(addComment);
+  const [commentIsValid, setCommentIsValid] = useState(true); // 🢣 initial -- nu vreau sa imi aparea eroare.
+
   const commentTextRef = useRef();
 
   const { quoteId, onAddedComment } = props;
@@ -18,9 +20,17 @@ const NewCommentForm = (props) => {
   const submitFormHandler = (event) => {
     event.preventDefault();
 
-    const enteredText = commentTextRef.current.value;
+    const enteredText = commentTextRef.current.value
+      .trim()
+      .replace(/\s+/g, " "); // inlocuiesc multiplele spatii goale
 
-    // validarea se poate face aici
+    //regex validity
+    const textIsValid = /^[a-zA-Z0-9\s;''""()?.!]+$/.test(enteredText);
+
+    setCommentIsValid(textIsValid);
+    if (!textIsValid) {
+      return;
+    }
 
     // pt a prelua id-ul pot folosi useParams, dar aceasta componenta nu ar mai putea fi globala(reutilizabila); o vreau mai flexibila 🢣 props
     sendQuote({ data: { text: enteredText }, quoteId }); // din nu stiu ce cauza nu-mi lua separat argumentele ca: ({text: enteredText}, quoteId) ..
@@ -33,6 +43,10 @@ const NewCommentForm = (props) => {
     }
   }, [status, error, onAddedComment]);
 
+  const textClasses = `${classes.control} ${
+    commentIsValid ? "" : "invalid" // 🢣 in index.css
+  }`;
+
   return (
     <form className={classes.form} onSubmit={submitFormHandler}>
       {status === "pending" && (
@@ -40,7 +54,7 @@ const NewCommentForm = (props) => {
           <LoadingSpinner />
         </div>
       )}
-      <div className={classes.control} onSubmit={submitFormHandler}>
+      <div className={textClasses} onSubmit={submitFormHandler}>
         <label htmlFor="comment">Your Comment</label>
         <textarea id="comment" rows="5" ref={commentTextRef}></textarea>
       </div>

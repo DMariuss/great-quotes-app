@@ -43,14 +43,14 @@
   transition: all 0.5s ease-in-out;
 }
 
-.up {
+/* .up {
   animation: item-move-up 0.5s ease-in-out;
 }
 .down {
   animation: item-move-down 0.5s ease-in-out;
-}
+} */
 
-@keyframes item-move-up {
+/* @keyframes item-move-up {
   0% {
     opacity: 0;
     transform: translate(0, 50%);
@@ -69,4 +69,4 @@
     opacity: 0;
     transform: translate(0, 50%);
   }
-}
+} */

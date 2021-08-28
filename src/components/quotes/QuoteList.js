@@ -51,9 +51,9 @@ const QuoteList = (props) => {
   //   return isSortingAscending ? a.id[1] - b.id[1] : b.id[1] - a.id[1];
   // })
 
-  let delay = -100;
+  let delay;
   const content = sorted.map((quote, index) => {
-    delay += 100;
+    delay = index * 10;
     return (
       <QuoteItem
         key={quote.id} // ⇧ mutat mai sus pe componenta de tranzitie

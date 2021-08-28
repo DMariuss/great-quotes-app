@@ -79,7 +79,6 @@ export const getAllComments = async (quoteId) => {
   if (!response.ok) {
     throw new Error(data.message || "Failed to fetch comments!");
   }
-
   const transformedComments = [];
   for (let key in data) {
     transformedComments.push({ id: key, ...data[key] });

@@ -25,11 +25,15 @@ const AddQuote = (props) => {
 
   // initial ⇨ status = pending; cand am un rezultat favorabil ⇨ status = completed
   useEffect(() => {
-    if (status === "completed") {
-      history.push("/quotes");
+    if (status === "completed" && !error) {
+      history.push("/quotes"); // trebuie pus in useEffect, altfel am eroare de randare (va redirectiona inainte de a se ajunga la randarea <QuoteForm> si a sfarsi ciclul)
     }
     // in cazul unei erori 🢣 to be continued
-  }, [status, history]);
+    if (status === "completed" && error) {
+      console.log(error);
+      //voi folosi un modal aici
+    }
+  }, [status, history, error]);
 
   return (
     <QuoteForm onAddQuote={addQuoteHandler} isLoading={status === "pending"} />

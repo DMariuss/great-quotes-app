@@ -64,3 +64,15 @@ body {
   font-size: 1.3rem;
   text-align: center;
 }
+
+.invalid label {
+  color: red;
+}
+.invalid input,
+.invalid textarea {
+  border-color: red !important;
+}
+
+.invalid p {
+  text-align: left;
+}

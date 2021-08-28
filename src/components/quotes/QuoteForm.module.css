@@ -47,3 +47,14 @@
 .actions button {
   font-size: 1.25rem;
 }
+
+/* .control.invalid label {
+  color: red;
+}
+.control.invalid input,
+.control.invalid textarea {
+  border-color: red;
+}
+.invalid p {
+  text-align: left;
+} */
