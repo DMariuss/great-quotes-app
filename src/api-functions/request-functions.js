@@ -68,8 +68,6 @@ export const addComment = async (commentData) => {
     throw new Error(data.message || "Could not add comment!");
   }
 
-  throw new Error("Soemthing somethign here");
-
   return { commentId: data.name };
 };
 
