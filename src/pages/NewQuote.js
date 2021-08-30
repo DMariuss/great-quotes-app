@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 //          ⇧ permite sa modificam istoricul paginilor vizitate : permite sa implementam navigare programabila
 import QuoteForm from "../components/quotes/QuoteForm";
+import ErrorModal from "../components/error-modal/ErrorModal";
 import useHttp from "../hooks/useHttp";
 import { addQuote } from "../api-functions/request-functions";
 
@@ -31,12 +32,18 @@ const AddQuote = (props) => {
     // in cazul unei erori 🢣 to be continued
     if (status === "completed" && error) {
       console.log(error);
-      //voi folosi un modal aici
+      //voi folosi un modal aici 🢣 eroarea trimisa direct pe ErrorModal(pt ca vreau sa implementez tranzitia componentei 🢣 starea este folosita in Modal.js)
     }
   }, [status, history, error]);
 
   return (
-    <QuoteForm onAddQuote={addQuoteHandler} isLoading={status === "pending"} />
+    <>
+      <QuoteForm
+        onAddQuote={addQuoteHandler}
+        isLoading={status === "pending"}
+      />
+      <ErrorModal error={error} />
+    </>
   );
 };
 

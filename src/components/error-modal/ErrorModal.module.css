@@ -1,0 +1,25 @@
+.modal-header {
+  background-color: teal;
+  padding: 0;
+}
+.modal-header h2 {
+  border-bottom: 1.5px solid rgb(12, 160, 160);
+  padding-bottom: 0.5rem;
+  /* box-shadow: 0px 1px 0px 0px #00000049; */
+  box-shadow: inset 0px -1px 0px 0px #0000005e;
+}
+
+.modal-header h2,
+.modal-header p {
+  margin: 0;
+  padding: 1rem;
+}
+
+.action {
+  padding: 1rem;
+  text-align: right;
+}
+
+.modal-btn {
+  padding: 0.5rem 2.5rem;
+}

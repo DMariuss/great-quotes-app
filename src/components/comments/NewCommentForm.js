@@ -3,6 +3,7 @@ import classes from "./NewCommentForm.module.css";
 import { addComment } from "../../api-functions/request-functions";
 import useHttp from "../../hooks/useHttp";
 import LoadingSpinner from "../UI/LoadingSpinner";
+import ErrorModal from "../error-modal/ErrorModal";
 
 const NewCommentForm = (props) => {
   const {
@@ -11,7 +12,7 @@ const NewCommentForm = (props) => {
     status,
     error,
   } = useHttp(addComment);
-  const [commentIsValid, setCommentIsValid] = useState(true); // 🢣 initial -- nu vreau sa imi aparea eroare.
+  const [commentIsValid, setCommentIsValid] = useState(true); // 🢣 initial -- nu vreau sa imi apara eroare.
 
   const commentTextRef = useRef();
 
@@ -41,6 +42,9 @@ const NewCommentForm = (props) => {
     if (status === "completed" && !error) {
       onAddedComment();
     }
+    if (status === "completed" && error) {
+      //modal here
+    }
   }, [status, error, onAddedComment]);
 
   const textClasses = `${classes.control} ${
@@ -48,20 +52,26 @@ const NewCommentForm = (props) => {
   }`;
 
   return (
-    <form className={classes.form} onSubmit={submitFormHandler}>
-      {status === "pending" && (
-        <div className={classes.loading}>
-          <LoadingSpinner />
+    <>
+      <form className={classes.form} onSubmit={submitFormHandler}>
+        {status === "pending" && (
+          <div className={classes.loading}>
+            <LoadingSpinner />
+          </div>
+        )}
+        <div className={textClasses} onSubmit={submitFormHandler}>
+          <label htmlFor="comment">Your Comment</label>
+          <textarea id="comment" rows="5" ref={commentTextRef}></textarea>
+          {!commentIsValid && (
+            <p className={classes.centered}>Please enter valid text!</p>
+          )}
         </div>
-      )}
-      <div className={textClasses} onSubmit={submitFormHandler}>
-        <label htmlFor="comment">Your Comment</label>
-        <textarea id="comment" rows="5" ref={commentTextRef}></textarea>
-      </div>
-      <div className={classes.actions}>
-        <button className="btn">Add Comment</button>
-      </div>
-    </form>
+        <div className={classes.actions}>
+          <button className="btn">Add Comment</button>
+        </div>
+      </form>
+      <ErrorModal error={error} />
+    </>
   );
 };
 
